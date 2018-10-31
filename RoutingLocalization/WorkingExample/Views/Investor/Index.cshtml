@@ -2,6 +2,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-Hello
-
+<p>
+    @* Normally, use a resource file *@
+    @(System.Globalization.CultureInfo.CurrentUICulture.Name == "de" ? "Hallo freund!" : "Hello friend!")
+</p>
 

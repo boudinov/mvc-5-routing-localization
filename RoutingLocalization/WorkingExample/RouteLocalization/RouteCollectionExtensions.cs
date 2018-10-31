@@ -27,6 +27,7 @@ namespace WorkingExample.RouteLocalization
         string _urlPrefix;
         string _defaultCulture;
         string[] _allCultures;
+        bool _prefixDefaultCulture = false;
 
         RouteValueDictionary _constraints;
         RouteValueDictionary _defaults;
@@ -40,6 +41,7 @@ namespace WorkingExample.RouteLocalization
             Array.Sort(_allCultures, (x, y) => x == defaultCulture ? 1 : x.CompareTo(y));
             _constraints = new RouteValueDictionary() { { "culture", new CultureConstraint(defaultCulture: defaultCulture) } };
             _defaults = new RouteValueDictionary() { { "culture", defaultCulture } };
+            _prefixDefaultCulture = Convert.ToBoolean(ConfigurationManager.AppSettings["PrefixDefaultCulture"]);
         }
 
         protected override IReadOnlyList<RouteEntry> GetActionDirectRoutes(
@@ -101,7 +103,7 @@ namespace WorkingExample.RouteLocalization
             bool cultureIsDefault = culture == _defaultCulture;
             var route = CreateLocalizedRoute(
                 originalEntry.Route,
-                cultureIsDefault ? "" : _urlPrefix,
+                cultureIsDefault && !_prefixDefaultCulture ? "" : _urlPrefix,
                 cultureIsDefault ? new RouteValueDictionary { { "culture", culture } } : new RouteValueDictionary(),
                 cultureIsDefault ? new RouteValueDictionary() : new RouteValueDictionary { { "culture", culture } }, //constraint culture route parameter to e.g. 'en'
                 translateUrl ? culture : ""
