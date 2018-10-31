@@ -3,12 +3,12 @@ Simple localization and translation for both conventional and attribute routing.
 
 # Features
 
-Normal `Route("~/invest")` automatically gets a language prefix, such as `/invest` for default language, and e.g. `/de/invest` for german language.  
+Normal `Route("~/invest")` automatically(can opt out) gets a language prefix, such as `/invest` for default language, and e.g. `/de/invest` for german language.
 You can achieve the same for conventional routing.
 
-For more control use LocalizeRoute("..."), so you can get `/de/investieren`, or disable route localization.
+For more control and/or url translation use LocalizeRoute("..."), so you can get `/de/investieren`, or disable route localization(opt out).
 
-The effect is that you get Thread.CurrentThread.CurrentCulture set appropriately during controller initialization.
+The effect is that you get Thread.CurrentThread.CurrentCulture and CurrentUICulture set appropriately during controller initialization.
 
 # Setup
 
@@ -62,6 +62,8 @@ you have 2 routes generated:
 ~/{culture}/invest  
 ~/invest (this one has a default route value of {culture} -> 'en')
 
+Default culture urls by default have no language prefix - you can change this by setting PrefixDefaultCulture in web.config to `true`, so you will have `/en/invest`.
+
 To have more control, use **LocalizedRoute**, usually for 2 scenarios:
 ### 1. Translate url path
 ```
@@ -89,5 +91,6 @@ ActionResult Index_Old_en()
 	return RedirectToActionPermanent("Index");
 }
 ```
+
 
 Ideas from post https://stackoverflow.com/questions/32764989/asp-net-mvc-5-culture-in-route-and-url
