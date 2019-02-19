@@ -74,11 +74,11 @@ generates these routes:
 ~/de/investieren  
 ~/invest
 
-### 2. Have a route that does not get prefix-localized, e.g. to permanent-redirect old urls to new ones for SEO reasons.
-For example if you need to redirect /investing to /invest. You can still opt out of url segments translation.
+### 2. Have a route that does not get prefix-localized, e.g. to permanent-redirect an old url to new one for SEO reasons.
+For example if you need to redirect /investing to /invest. You can still opt out of url translation.
 ```
-[LocalizeRoute("~/investing", explicitCulture: "en". translateUrl: false)
-ActionResult Index_Old()
+[LocalizeRoute("~/investing", explicitCulture: "en", translateUrl: false)
+ActionResult Index_Old_en()
 {
 	return RedirectToActionPermanent("Index");
 }
