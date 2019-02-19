@@ -1,5 +1,5 @@
 # mvc-5-routing-localization
-Simple localization and translation for both conventional and attribute routing. 
+Simple localization and translation for both conventional and attribute static routing. 
 
 # Features
 
