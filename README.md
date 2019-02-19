@@ -68,25 +68,17 @@ To have more control, use **LocalizedRoute**, usually for 2 scenarios:
 ### 1. Translate url path
 ```
 [LocalizedRoute("~/invest")]
+ActionResult Index() { ... }
 ```
 generates these routes:  
 ~/de/investieren  
 ~/invest
 
-### 2. Have a route that does not get neither prefix-localized or translated, e.g. to permanent-redirect old urls to new ones for SEO reasons.
-For example if you need to redirect /investing to /invest
+### 2. Have a route that does not get prefix-localized, e.g. to permanent-redirect old urls to new ones for SEO reasons.
+For example if you need to redirect /investing to /invest. You can still opt out of url segments translation.
 ```
-[LocalizeRoute("~/investing", explicitCulture: "en")
+[LocalizeRoute("~/investing", explicitCulture: "en". translateUrl: false)
 ActionResult Index_Old()
-{
-	return RedirectToActionPermanent("Index");
-}
-```
-
-or just the english url:
-```
-[LocalizeRoute("~/investing", translateUrl: false, explicitCulture: "en")
-ActionResult Index_Old_en()
 {
 	return RedirectToActionPermanent("Index");
 }
