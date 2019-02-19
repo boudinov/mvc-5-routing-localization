@@ -9,6 +9,7 @@ namespace WorkingExample.Controllers
 {
     public class InvestorController : Controller
     {
+        //for german gets translated to /de/investieren
         [LocalizedRoute("~/invest")]
         public ActionResult Index()
         {
