@@ -139,6 +139,11 @@ namespace WorkingExample.RouteLocalization
             var parts = url.Split(new char[] { '/' });
             foreach (var part in parts)
             {
+                // If url contains parameters like {id}, don't try to translate them.
+                // e.g. [LocalizedRoute("~/invest/{id}")]
+                if (part.StartsWith("{"))
+                    continue;
+                
                 var translatedPart = TranslatedUrls.ResourceManager.GetString(part, new System.Globalization.CultureInfo(culture));
                 if (string.IsNullOrEmpty(translatedPart))
                     throw new Exception($"Could not find translation for url part {part} for culture {culture}");
